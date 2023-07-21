@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.arduino.mapper.UinoSqlMapper">
+    <resultMap type="com.ruoyi.arduino.domain.bo.ArduinoCGQBo" id="SysUserResult">
+
+        <id     property="id"       column="id"      />
+        <result property="remarks"       column="remarks"      />
+        <result property="inputStr"     column="input_str"    />
+        <result property="createTime"     column="create_time"    />
+        <result property="updateTime"        column="update_time"        />
+        <result property="ip"  column="ip"  />
+    </resultMap>
+
+
+
+    <insert id="insertMap" parameterType="com.ruoyi.arduino.domain.bo.ArduinoCGQBo" keyProperty="id" useGeneratedKeys="true">
+    insert arduino_cgq (
+        <if test="id != null and id != 0">id,</if>
+        <if test="remarks != null and remarks != ''">remarks,</if>
+        <if test="inputStr != null and inputStr != ''">input_str,</if>
+        <if test="updateTime != null">update_time,</if>
+        <if test="ip != null and ip != ''">ip,</if>
+        create_time
+    ) values (
+        <if test="id != null and id != 0">#{id},</if>
+        <if test="remarks != null and remarks != ''">#{remarks},</if>
+        <if test="inputStr != null and inputStr != ''">#{inputStr},</if>
+        <if test="updateTime != null">#{updateTime},</if>
+        <if test="ip != null and ip != ''">#{ip},</if>
+        sysdate()
+        )
+    </insert>
+
+
+    <update id="updateMap" parameterType="com.ruoyi.arduino.domain.bo.ArduinoCGQBo">
+        update arduino_cgq
+        <set>
+            <if test="remarks != null and remarks != ''">remarks = #{remarks},</if>
+            <if test="inputStr != null and inputStr != ''">input_str = #{inputStr},</if>
+            <if test="ip != null and ip != ''">ip = #{ip},</if>
+            update_time = sysdate()
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>
